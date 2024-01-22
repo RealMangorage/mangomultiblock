@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "org.mangorage.mangomultiblock.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "refmap": "mangomultiblock.refmap.json",
+  "mixins": [
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
