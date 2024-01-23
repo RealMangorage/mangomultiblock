@@ -1,6 +1,5 @@
-package org.mangorage.mangomultiblock.item;
+package org.mangorage.mod.item;
 
-import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.Item;
@@ -9,8 +8,7 @@ import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.Rotation;
-import org.mangorage.mangomultiblock.Multiblocks;
+import org.mangorage.mod.Multiblocks;
 
 public class DetectorItem extends Item {
     public DetectorItem() {
@@ -24,14 +22,16 @@ public class DetectorItem extends Item {
         if (!lvl.isClientSide) {
             var player = pContext.getPlayer();
             if (player != null && player.isHolding(Items.STICK)) {
-                var matches = Multiblocks.MULTIBLOCK_EXAMPLE.matchesWithResult(lvl, pContext.getClickedPos(), Rotation.NONE);
+                var matches = Multiblocks.PATTERN.build().matchesWithResult(lvl, pContext.getClickedPos());
+                pContext.getPlayer().sendSystemMessage(Component.literal("FOUND STRUCTURE! Blocks: " + matches.blocks().size()));
                 matches.blocks().forEach(a -> {
                     if (a.getLevel() instanceof Level level) level.setBlock(a.getPos(), Blocks.BEDROCK.defaultBlockState(), Block.UPDATE_CLIENTS);
                 });
             } else {
-                var matches = Multiblocks.MULTIBLOCK_EXAMPLE.matches(lvl, pContext.getClickedPos(), pContext.getClickedFace().getOpposite());
-                if (matches)
+                var matches = Multiblocks.PATTERN.build().matches(lvl, pContext.getClickedPos());
+                if (matches) {
                     pContext.getPlayer().sendSystemMessage(Component.literal("FOUND STRUCTURE!"));
+                }
             }
         }
         return super.useOn(pContext);
