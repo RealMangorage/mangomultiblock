@@ -2,7 +2,6 @@ package org.mangorage.mangomultiblock.core;
 
 import com.google.common.base.Joiner;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.state.pattern.BlockInWorld;
@@ -13,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Predicate;
 
-public final class SimpleMultiBlockPattern implements IIMultiBlockPattern {
+public final class SimpleMultiBlockPattern implements IMultiBlockPattern {
     private final List<MultiBlockOffsetPos> multiBlockOffsetPosList;
     private final Map<Character, Predicate<BlockInWorld>> predicateHashMap;
 
@@ -73,7 +72,7 @@ public final class SimpleMultiBlockPattern implements IIMultiBlockPattern {
             if (!predicateHashMap.containsKey(character)) predicateHashMap.put(character, worldPredicate);
             return this;
         }
-        public IIMultiBlockPattern build() {
+        public IMultiBlockPattern build() {
             ensureProperlyBuilt();
             return new SimpleMultiBlockPattern(List.copyOf(multiBlockOffsetPosList), Map.copyOf(predicateHashMap));
         }

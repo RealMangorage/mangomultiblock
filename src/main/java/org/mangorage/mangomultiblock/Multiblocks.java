@@ -2,11 +2,11 @@ package org.mangorage.mangomultiblock;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.Blocks;
-import org.mangorage.mangomultiblock.core.IIMultiBlockPattern;
+import org.mangorage.mangomultiblock.core.IMultiBlockPattern;
 import org.mangorage.mangomultiblock.core.SimpleMultiBlockPattern;
 
 public class Multiblocks {
-    public static final IIMultiBlockPattern MULTIBLOCK_EXAMPLE =
+    public static final IMultiBlockPattern MULTIBLOCK_EXAMPLE =
             SimpleMultiBlockPattern.Builder.start()
                     .add('C', new BlockPos(0, 0, 0))
                     .add('#', new BlockPos(0, -1, 0))

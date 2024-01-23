@@ -5,7 +5,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Rotation;
 
-public interface IIMultiBlockPattern {
+public interface IMultiBlockPattern {
     boolean matches(Level level, BlockPos blockPos, Rotation rotation);
     MultiblockMatchResult matchesWithResult(Level level, BlockPos blockPos, Rotation rotation);
 
