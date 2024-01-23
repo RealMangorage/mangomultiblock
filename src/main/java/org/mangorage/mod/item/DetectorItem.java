@@ -22,13 +22,13 @@ public class DetectorItem extends Item {
         if (!lvl.isClientSide) {
             var player = pContext.getPlayer();
             if (player != null && player.isHolding(Items.STICK)) {
-                var matches = Multiblocks.PATTERN.build().matchesWithResult(lvl, pContext.getClickedPos());
+                var matches = Multiblocks.PATTERN.matchesWithResult(lvl, pContext.getClickedPos());
                 pContext.getPlayer().sendSystemMessage(Component.literal("FOUND STRUCTURE! Blocks: " + matches.blocks().size()));
                 matches.blocks().forEach(a -> {
                     if (a.getLevel() instanceof Level level) level.setBlock(a.getPos(), Blocks.BEDROCK.defaultBlockState(), Block.UPDATE_CLIENTS);
                 });
             } else {
-                var matches = Multiblocks.PATTERN.build().matches(lvl, pContext.getClickedPos());
+                var matches = Multiblocks.PATTERN.matches(lvl, pContext.getClickedPos());
                 if (matches) {
                     pContext.getPlayer().sendSystemMessage(Component.literal("FOUND STRUCTURE!"));
                 }

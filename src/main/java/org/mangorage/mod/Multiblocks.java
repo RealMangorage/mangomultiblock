@@ -27,9 +27,10 @@ public class Multiblocks {
                     .where('B', b -> b.getState().is(Blocks.DIAMOND_BLOCK))
                     .build();
 
-    public static final IMultiBlockPatternBuilder PATTERN =
+    public static final IMultiBlockPattern PATTERN =
             SimpleMultiBlockPattern.AisleBuilder.start()
                     .aisle("0   0", "     ", "  *  ", "     ", "0   0")
                     .where('*', a -> a.getState().is(Blocks.DIAMOND_BLOCK))
-                    .where('0', a -> a.getState().is(Blocks.BEACON));
+                    .where('0', a -> a.getState().is(Blocks.BEACON))
+                    .build();
 }
