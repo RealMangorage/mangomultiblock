@@ -1,14 +1,18 @@
 package org.mangorage.mangomultiblock.core;
 
+import com.google.common.base.Joiner;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Vec3i;
 import net.minecraft.world.level.block.Rotation;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class Util {
     public static Rotation DirectionToRotation(Direction direction) {
@@ -20,7 +24,9 @@ public class Util {
         };
     }
 
-    public static Map<Character, List<MultiBlockOffsetPos>> parseBlockPattern(List<String[]> aisles) {
+    public static Map<Character, List<MultiBlockOffsetPos>> parseBlockPattern(List<String[]> aisles, Set<Character> allowedCharacters) {
+        Collections.reverse(aisles); // Because it is gonna be upside down if we dont!
+        aisles.forEach(a -> System.out.println(Arrays.toString(a)));//
         Map<Character, List<MultiBlockOffsetPos>> blockOffsets = new HashMap<>();
 
         int starX = -1;
@@ -56,7 +62,7 @@ public class Util {
                 for (int z = 0; z < aisle[x].length(); z++) {
                     char currentChar = aisle[x].charAt(z);
 
-                    if (currentChar != ' ') {
+                    if (allowedCharacters.contains(currentChar)) {
                         if (!blockOffsets.containsKey(currentChar)) {
                             blockOffsets.put(currentChar, new ArrayList<>());
                         }

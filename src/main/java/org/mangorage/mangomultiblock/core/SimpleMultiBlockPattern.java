@@ -129,7 +129,7 @@ public final class SimpleMultiBlockPattern implements IMultiBlockPattern {
         @Override
         public IMultiBlockPattern build() {
             SimpleMultiBlockPattern.Builder simple = SimpleMultiBlockPattern.Builder.start();
-            var data = Util.parseBlockPattern(pattern);
+            var data = Util.parseBlockPattern(pattern, lookup.keySet());
 
             data.forEach((c, blockOffsetPos) -> {
                 blockOffsetPos.forEach(o -> simple.add(c, o.offsetPos()));
