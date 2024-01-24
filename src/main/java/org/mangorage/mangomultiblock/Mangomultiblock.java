@@ -1,4 +1,4 @@
-package org.mangorage.mod;
+package org.mangorage.mangomultiblock;
 
 import com.mojang.logging.LogUtils;
 import net.minecraft.world.item.Item;
@@ -8,7 +8,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
-import org.mangorage.mod.item.DetectorItem;
+import org.mangorage.mangomultiblock.item.DetectorItem;
 import org.slf4j.Logger;
 
 @Mod(Mangomultiblock.MODID)
