@@ -182,3 +182,11 @@ tasks.named('jar', Jar).configure {
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
 }
+
+jar {
+    from sourceSets.main.output
+    from sourceSets.main.allJava
+    from sourceSets.main.allSource
+
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
