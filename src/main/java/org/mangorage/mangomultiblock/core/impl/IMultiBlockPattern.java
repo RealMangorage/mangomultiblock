@@ -1,13 +1,16 @@
-package org.mangorage.mangomultiblock.core;
+package org.mangorage.mangomultiblock.core.impl;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Rotation;
+import org.mangorage.mangomultiblock.core.misc.Util;
+import org.mangorage.mangomultiblock.core.misc.MultiblockMatchResult;
 
 public interface IMultiBlockPattern {
     boolean matches(Level level, BlockPos blockPos, Rotation rotation);
     MultiblockMatchResult matchesWithResult(Level level, BlockPos blockPos, Rotation rotation);
+    void construct(Level level, BlockPos blockPos);
 
     default boolean matches(Level level, BlockPos blockPos, Direction direction) {
         return matches(level, blockPos, Util.DirectionToRotation(direction));

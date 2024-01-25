@@ -27,6 +27,8 @@ public class DetectorItem extends Item {
                 matches.blocks().forEach(a -> {
                     if (a.getLevel() instanceof Level level) level.setBlock(a.getPos(), Blocks.BEDROCK.defaultBlockState(), Block.UPDATE_CLIENTS);
                 });
+            } else if (player != null && player.isHolding(Items.IRON_AXE)) {
+                MultiblockExample.PATTERN.construct(lvl, pContext.getClickedPos().above(5));
             } else {
                 var matches = MultiblockExample.PATTERN.matches(lvl, pContext.getClickedPos());
                 if (matches) {

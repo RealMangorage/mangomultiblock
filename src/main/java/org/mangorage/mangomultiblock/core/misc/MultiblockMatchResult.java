@@ -1,4 +1,4 @@
-package org.mangorage.mangomultiblock.core;
+package org.mangorage.mangomultiblock.core.misc;
 
 import net.minecraft.world.level.block.state.pattern.BlockInWorld;
 
