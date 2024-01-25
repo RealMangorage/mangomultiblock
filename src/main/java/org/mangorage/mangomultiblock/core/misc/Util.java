@@ -25,7 +25,6 @@ public class Util {
 
     public static Map<Character, List<MultiBlockOffsetPos>> parseBlockPattern(List<String[]> aisles, Set<Character> allowedCharacters) {
         Collections.reverse(aisles); // Because it is gonna be upside down if we dont!
-        aisles.forEach(a -> System.out.println(Arrays.toString(a)));//
         Map<Character, List<MultiBlockOffsetPos>> blockOffsets = new HashMap<>();
 
         int starX = -1;
