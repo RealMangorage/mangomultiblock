@@ -14,6 +14,7 @@ import org.mangorage.mangomultiblock.core.misc.MultiblockMatchResult;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.function.BiPredicate;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
@@ -59,7 +60,7 @@ public final class SimpleMultiBlockPattern implements IMultiBlockPattern {
     }
 
     @Override
-    public void construct(Level level, BlockPos blockPos) {
+    public void construct(Level level, BlockPos blockPos, BiPredicate<Character, BlockState> stateBiPredicate) {
         if (level.isClientSide) return;
         if (level.getServer() == null) return;
         for (MultiBlockOffsetPos multiBlockOffsetPos : multiBlockOffsetPosList) {
@@ -67,7 +68,8 @@ public final class SimpleMultiBlockPattern implements IMultiBlockPattern {
             Supplier<BlockState> stateSupplier = blockProvider.get(character);
             if (stateSupplier != null) {
                 var pos = blockPos.offset(multiBlockOffsetPos.offsetPos().rotate(Rotation.NONE));
-                level.getServer().tell(new TickTask(5, () -> level.setBlock(pos, stateSupplier.get(), Block.UPDATE_ALL)));
+                var state = stateSupplier.get();
+                if (stateBiPredicate.test(character, state)) level.getServer().tell(new TickTask(3, () -> level.setBlock(pos, state, Block.UPDATE_ALL)));
             }
         }
     }

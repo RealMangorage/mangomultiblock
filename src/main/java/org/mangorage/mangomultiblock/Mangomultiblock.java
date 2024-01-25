@@ -26,5 +26,6 @@ public class Mangomultiblock {
     public Mangomultiblock() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         ITEMS.register(modEventBus);
+        MultiblockExample.init();
     }
 }

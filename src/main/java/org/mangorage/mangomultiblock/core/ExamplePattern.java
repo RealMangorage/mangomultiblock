@@ -11,6 +11,7 @@ import org.mangorage.mangomultiblock.core.misc.MultiblockMatchResult;
 
 import java.util.List;
 import java.util.Map;
+import java.util.function.BiPredicate;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
@@ -32,7 +33,7 @@ public class ExamplePattern implements IBetterPattern {
     }
 
     @Override
-    public void construct(Level level, BlockPos blockPos) {
+    public void construct(Level level, BlockPos blockPos, BiPredicate<Character, BlockState> blockStateBiPredicate) {
 
     }
 }

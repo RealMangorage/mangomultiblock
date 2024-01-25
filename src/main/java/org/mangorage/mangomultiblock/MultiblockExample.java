@@ -11,7 +11,7 @@ import org.mangorage.mangomultiblock.core.impl.IMultiBlockPattern;
 public class MultiblockExample {
     public static final IMultiBlockPattern MULTIBLOCK_EXAMPLE =
             SimpleMultiBlockPatternBuilder.start()
-                    .add('B', new BlockPos(0, 1, 1))
+                    .add('*', new BlockPos(0, 1, 1))
                     .add('C', new BlockPos(0, 0, 0))
                     .add('#', new BlockPos(0, -1, 0))
                     .add('#', new BlockPos(1, -1, 0))
@@ -27,6 +27,7 @@ public class MultiblockExample {
                     .where('C', b -> b.getState().is(Blocks.BEACON))
                     .where('#', b -> b.getState().is(Blocks.IRON_BLOCK))
                     .where('B', b -> b.getState().is(Blocks.DIAMOND_BLOCK))
+                    .where('*', b -> b.getState().is(Blocks.DIAMOND_BLOCK))
                     .build();
 
     public static final IMultiBlockPattern PATTERN =
@@ -46,7 +47,7 @@ public class MultiblockExample {
      */
     public static final IBetterPattern MULTIBLOCK_EXAMPLE_BETTER =
             SimpleMultiBlockPatternBuilder.start()
-                    .add('B', new BlockPos(0, 1, 1))
+                    .add('*', new BlockPos(0, 1, 1))
                     .add('C', new BlockPos(0, 0, 0))
                     .add('#', new BlockPos(0, -1, 0))
                     .add('#', new BlockPos(1, -1, 0))
@@ -62,5 +63,8 @@ public class MultiblockExample {
                     .where('C', b -> b.getState().is(Blocks.BEACON))
                     .where('#', b -> b.getState().is(Blocks.IRON_BLOCK))
                     .where('B', b -> b.getState().is(Blocks.DIAMOND_BLOCK))
+                    .where('*', b -> b.getState().is(Blocks.DIAMOND_BLOCK))
                     .build(ExamplePattern::new);
+
+    public static void init() {}
 }

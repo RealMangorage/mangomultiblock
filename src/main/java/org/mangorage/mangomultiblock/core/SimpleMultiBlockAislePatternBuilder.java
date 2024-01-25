@@ -68,6 +68,9 @@ public final class SimpleMultiBlockAislePatternBuilder implements IMultiBlockPat
     @Override
     public <T extends IMultiBlockPattern> T build(IPatternBuilder<T> builder) {
         var data = Util.parseBlockPattern(pattern, lookup.keySet());
+        var coreList = data.get('*');
+        if (coreList == null || coreList.size() != 1)
+            throw new IllegalArgumentException("Failed to build pattern due to having more or less than one \"*\" defined! Have: %s Expected: 1".formatted(coreList != null ? coreList.size() : 0));
         List<MultiBlockOffsetPos> list = Lists.newArrayList();
         data.forEach((k, v) -> list.addAll(v));
         return builder.make(list, lookup, blockProvider);

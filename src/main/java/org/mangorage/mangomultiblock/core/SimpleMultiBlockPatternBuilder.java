@@ -10,7 +10,9 @@ import org.mangorage.mangomultiblock.core.impl.IMultiBlockPattern;
 import org.mangorage.mangomultiblock.core.impl.IMultiBlockPatternBuilder;
 import org.mangorage.mangomultiblock.core.impl.IPatternBuilder;
 import org.mangorage.mangomultiblock.core.misc.MultiBlockOffsetPos;
+import org.mangorage.mangomultiblock.core.misc.Util;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -23,15 +25,15 @@ public final class SimpleMultiBlockPatternBuilder implements IMultiBlockPatternB
         return new SimpleMultiBlockPatternBuilder();
     }
 
-    private final List<MultiBlockOffsetPos> multiBlockOffsetPosList = Lists.newArrayList();
+    private final Map<Character, List<MultiBlockOffsetPos>> multiBlockOffsetPosList = Maps.newHashMap();
     private final Map<Character, Predicate<BlockInWorld>> predicateHashMap = Maps.newHashMap();
     private final Map<Character, Supplier<BlockState>> blockProvider = Maps.newHashMap();
 
     private SimpleMultiBlockPatternBuilder() {}
 
-    private void ensureProperlyBuilt() {
+    private void ensureProperlyBuilt(List<MultiBlockOffsetPos> list) {
         HashSet<Character> characters = new HashSet<>();
-        multiBlockOffsetPosList.forEach(multiBlockOffsetPos -> {
+        list.forEach(multiBlockOffsetPos -> {
             if (!predicateHashMap.containsKey(multiBlockOffsetPos.character()))
                 characters.add(multiBlockOffsetPos.character());
         });
@@ -40,7 +42,7 @@ public final class SimpleMultiBlockPatternBuilder implements IMultiBlockPatternB
     }
 
     public SimpleMultiBlockPatternBuilder add(char character, BlockPos relativePos) {
-        multiBlockOffsetPosList.add(new MultiBlockOffsetPos(character, relativePos));
+        multiBlockOffsetPosList.computeIfAbsent(character, ArrayList::new).add(new MultiBlockOffsetPos(character, relativePos));
         return this;
     }
 
@@ -56,7 +58,11 @@ public final class SimpleMultiBlockPatternBuilder implements IMultiBlockPatternB
 
 
     public <T extends IMultiBlockPattern> T build(IPatternBuilder<T> builder) {
-        ensureProperlyBuilt();
-        return builder.make(multiBlockOffsetPosList, predicateHashMap, blockProvider);
+        var coreList = multiBlockOffsetPosList.get('*');
+        if (coreList == null || coreList.size() != 1)
+            throw new IllegalArgumentException("Failed to build pattern due to having more or less than one \"*\" defined! Have: %s Expected: 1".formatted(coreList != null ? coreList.size() : 0));
+        List<MultiBlockOffsetPos> list = Lists.newArrayList();
+        multiBlockOffsetPosList.forEach((k, v) -> list.addAll(v));
+        return builder.make(list, predicateHashMap, blockProvider);
     }
 }
