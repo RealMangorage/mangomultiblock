@@ -8,24 +8,24 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
+import org.mangorage.mangomultiblock.core.registry.ItemRegistry;
 import org.mangorage.mangomultiblock.item.DetectorItem;
 import org.slf4j.Logger;
 
-@Mod(Mangomultiblock.MODID)
-public class Mangomultiblock {
+@Mod(MangoMultiBlock.MODID)
+public class MangoMultiBlock {
 
     // Define mod id in a common place for everything to reference
+    @Deprecated
     public static final String MODID = "mangomultiblock";
     // Directly reference a slf4j logger
     private static final Logger LOGGER = LogUtils.getLogger();
     // Create a Deferred Register to hold Blocks which will all be registered under the "mangomultiblock" namespace
-    private static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MODID);
-    public static final RegistryObject<Item> EXAMPLE_ITEM = ITEMS.register("example_item", DetectorItem::new);
 
 
-    public Mangomultiblock() {
+    public MangoMultiBlock() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
-        ITEMS.register(modEventBus);
+        ItemRegistry.init(modEventBus);
         MultiblockExample.init();
     }
 }

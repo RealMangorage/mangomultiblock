@@ -1,5 +1,6 @@
 package org.mangorage.mangomultiblock.item;
 
+import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.Item;
@@ -30,7 +31,7 @@ public class DetectorItem extends Item {
             } else if (player != null && player.isHolding(Items.IRON_AXE)) {
                 MultiblockExample.PATTERN.construct(lvl, pContext.getClickedPos().above(5));
             } else {
-                var matches = MultiblockExample.PATTERN.matches(lvl, pContext.getClickedPos());
+                var matches = MultiblockExample.PATTERN.matches(lvl, pContext.getClickedPos(), Direction.EAST);
                 if (matches) {
                     pContext.getPlayer().sendSystemMessage(Component.literal("FOUND STRUCTURE!"));
                 }

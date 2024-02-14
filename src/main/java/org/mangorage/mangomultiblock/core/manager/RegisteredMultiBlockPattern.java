@@ -1,5 +1,6 @@
 package org.mangorage.mangomultiblock.core.manager;
 
+import net.minecraft.resources.ResourceLocation;
 import org.mangorage.mangomultiblock.core.impl.IMultiBlockPattern;
 
-public record RegisteredMultiBlockPattern<T>(String ID, T data, IMultiBlockPattern pattern) { }
+public record RegisteredMultiBlockPattern(MultiBlockManager manager, ResourceLocation ID, IMultiBlockPattern pattern) { }

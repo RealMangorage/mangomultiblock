@@ -12,7 +12,9 @@ import java.util.function.BiPredicate;
 
 public interface IMultiBlockPattern {
     boolean matches(Level level, BlockPos blockPos, Rotation rotation);
+
     MultiblockMatchResult matchesWithResult(Level level, BlockPos blockPos, Rotation rotation);
+
     void construct(Level level, BlockPos blockPos, BiPredicate<Character, BlockState> blockStateBiPredicate);
 
 
