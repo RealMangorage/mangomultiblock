@@ -8,6 +8,7 @@ import org.mangorage.mangomultiblock.core.impl.IMultiBlockPattern;
 
 import javax.annotation.Nullable;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class MultiBlockManager {
@@ -15,6 +16,18 @@ public class MultiBlockManager {
 
     public static MultiBlockManager getOrCreate(String modID, String managerID) {
         return MANAGERS.computeIfAbsent(new ResourceLocation(modID, managerID), MultiBlockManager::new);
+    }
+
+    public static List<MultiBlockManager> getManagers() {
+        return List.copyOf(MANAGERS.values());
+    }
+
+    public static RegisteredMultiBlockPattern findAnyStructure(Level level, BlockPos blockPos, Rotation rotation) {
+        for (MultiBlockManager manager : getManagers()) {
+            var structure = manager.findStructure(level, blockPos, rotation);
+            if (structure != null) return structure;
+        }
+        return null;
     }
 
     private final String modID;

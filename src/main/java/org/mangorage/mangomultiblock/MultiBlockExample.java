@@ -10,7 +10,7 @@ import org.mangorage.mangomultiblock.core.SimpleMultiBlockPatternBuilder;
 import org.mangorage.mangomultiblock.core.impl.IMultiBlockPattern;
 import org.mangorage.mangomultiblock.core.manager.MultiBlockManager;
 
-public class MultiblockExample {
+public class MultiBlockExample {
     public static final MultiBlockManager MANAGER = MultiBlockManager.getOrCreate(Constants.MODID, "miners");
 
     public static final IMultiBlockPattern MULTIBLOCK_RAW_POSITION_EXAMPLE =
