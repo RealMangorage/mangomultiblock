@@ -15,7 +15,7 @@ public interface IMultiBlockPattern {
 
     MultiblockMatchResult matchesWithResult(Level level, BlockPos blockPos, Rotation rotation);
 
-    void construct(Level level, BlockPos blockPos, BiPredicate<Character, BlockState> blockStateBiPredicate);
+    void construct(Level level, BlockPos blockPos, BiPredicate<Character, BlockState> blockStateBiPredicate, Rotation rotation);
 
 
     default boolean matches(Level level, BlockPos blockPos, Direction direction) {
@@ -34,7 +34,12 @@ public interface IMultiBlockPattern {
         return matchesWithResult(level, blockPos, Rotation.NONE);
     }
 
+
+    default void construct(Level level, BlockPos pos, Rotation rotation) {
+        construct(level, pos, (c, s) -> true, rotation);
+    }
+
     default void construct(Level level, BlockPos blockPos) {
-        construct(level, blockPos, (a, b) -> true);
+        construct(level, blockPos, Rotation.NONE);
     }
 }
