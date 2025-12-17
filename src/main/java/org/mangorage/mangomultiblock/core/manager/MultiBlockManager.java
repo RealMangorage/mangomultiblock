@@ -15,7 +15,7 @@ public class MultiBlockManager {
     private static final HashMap<ResourceLocation, MultiBlockManager> MANAGERS = new HashMap<>();
 
     public static MultiBlockManager getOrCreate(String modID, String managerID) {
-        return MANAGERS.computeIfAbsent(new ResourceLocation(modID, managerID), MultiBlockManager::new);
+        return MANAGERS.computeIfAbsent(ResourceLocation.fromNamespaceAndPath(modID, managerID), MultiBlockManager::new);
     }
 
     public static List<MultiBlockManager> getManagers() {
@@ -51,7 +51,7 @@ public class MultiBlockManager {
     }
 
     public <E extends IMultiBlockPattern> E register(String ID, E blockPattern) {
-        return register(new ResourceLocation(modID, ID), blockPattern);
+        return register(ResourceLocation.fromNamespaceAndPath(modID, ID), blockPattern);
     }
 
     public @Nullable RegisteredMultiBlockPattern findStructure(Level level, BlockPos blockPos, Rotation rotation) {
@@ -67,6 +67,6 @@ public class MultiBlockManager {
     }
 
     public @Nullable RegisteredMultiBlockPattern getStructure(String ID) {
-        return getStructure(new ResourceLocation(modID, ID));
+        return getStructure(ResourceLocation.fromNamespaceAndPath(modID, ID));
     }
 }
