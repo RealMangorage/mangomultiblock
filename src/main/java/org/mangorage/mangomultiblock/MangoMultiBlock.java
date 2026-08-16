@@ -1,21 +1,24 @@
 package org.mangorage.mangomultiblock;
 
-import com.mojang.logging.LogUtils;
-import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
+
 import org.mangorage.mangomultiblock.core.Constants;
 import org.mangorage.mangomultiblock.core.registry.ItemRegistry;
-import org.slf4j.Logger;
 
 @Mod(Constants.MODID)
 public class MangoMultiBlock {
-
-    private static final Logger LOGGER = LogUtils.getLogger();
-
-    public MangoMultiBlock() {
-        IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+    
+    public MangoMultiBlock(IEventBus modEventBus) {
+        // Registrar items
         ItemRegistry.init(modEventBus);
-        MultiBlockExample.init();
+        
+        // Setup común
+        modEventBus.addListener(this::commonSetup);
+    }
+    
+    private void commonSetup(FMLCommonSetupEvent event) {
+        // Lógica de setup común aquí
     }
 }
